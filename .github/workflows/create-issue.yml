@@ -1,4 +1,4 @@
-name: Create issue on push to main
+name: Create Issue on Push
 on:
   push:
     branches:
@@ -7,12 +7,14 @@ jobs:
   create_issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create issue
-        uses: mathieulepoutrebelgium/create-issue@v2.6.0
-        with:
-          title: New code pushed to main
-          body: Someone pushed new code to the main branch.
-          labels: auto-generated
-          assignees: mathieulepoutrebelgium
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Create issue
+      uses: peter-evans/create-issue@v2.6.0
+      with:
+        title: New issue created by GitHub Actions
+        body: |
+          This issue was created automatically by a push to the main branch.
+          You can provide more information about the issue here.
+        repository: mathieulepoutrebelgium/Exalate
+        labels: 'bug'
