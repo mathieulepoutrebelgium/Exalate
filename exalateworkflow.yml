@@ -1,29 +1,23 @@
 name: Create Issue
-
 on:
   push:
-    branches: [main]
-
+    branches:
+      - main
 jobs:
-  create-issue:
+  create_issue:
     runs-on: ubuntu-latest
     steps:
       - name: Create Issue
-        uses: actions/github-script@v4
+        uses: actions/github-script@v5
         with:
           script: |
-            const title = "New issue title";
-            const body = "New issue body";
-            const owner = "your-username";
-            const repo = "your-repo-name";
-
-            const { data } = await github.issues.create({
+            const { owner, repo } = context.repo;
+            const issue = await octokit.issues.create({
               owner,
               repo,
-              title,
-              body
+              title: 'New Issue Title',
+              body: 'This is the body of the issue',
             });
-
-            console.log(`Created issue: ${data.html_url}`);
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            console.log(`Created issue #${issue.data.number}`);
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
