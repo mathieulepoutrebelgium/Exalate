@@ -1,0 +1,18 @@
+name: Create issue on push to main
+on:
+  push:
+    branches:
+      - main
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create issue
+        uses: peter-evans/create-issue@v2.6.0
+        with:
+          title: New code pushed to main
+          body: Someone pushed new code to the main branch.
+          labels: auto-generated
+          assignees: mathieulepoutrebelgium
