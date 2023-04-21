@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Create issue
-        uses: peter-evans/create-issue@v2.6.0
+        uses: mathieulepoutrebelgium/Exalate/create-issue@v2.6.0
         with:
           title: New code pushed to main
           body: Someone pushed new code to the main branch.
