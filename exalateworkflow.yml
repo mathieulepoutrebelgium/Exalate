@@ -1,4 +1,5 @@
 name: Create Issue
+
 on:
   push:
     branches: [main]
@@ -7,11 +8,22 @@ jobs:
   create-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Create Issue
-        uses: mathieulepoutrebelgium/create-issue@v2
+        uses: actions/github-script@v4
         with:
-          title: "New issue"
-          body: "This is a new issue"
+          script: |
+            const title = "New issue title";
+            const body = "New issue body";
+            const owner = "your-username";
+            const repo = "your-repo-name";
+
+            const { data } = await github.issues.create({
+              owner,
+              repo,
+              title,
+              body
+            });
+
+            console.log(`Created issue: ${data.html_url}`);
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
