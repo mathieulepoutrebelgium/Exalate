@@ -1,4 +1,4 @@
-name: Create Issue
+name: Create Issue on Commit
 
 on:
   push:
@@ -9,8 +9,9 @@ jobs:
   create-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: npm install @octokit/rest
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Create Issue
         uses: actions/github-script@v4
         with:
@@ -24,5 +25,6 @@ jobs:
               title: title,
               body: body
             });
+
         env:
           GITHUB_TOKEN: ${{ secrets.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 }}
