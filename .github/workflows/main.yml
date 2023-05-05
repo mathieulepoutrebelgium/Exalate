@@ -20,6 +20,4 @@ jobs:
         labels: |
           bug
           enhancement
-        assignees: |
-          @username1
-          @username2
+
